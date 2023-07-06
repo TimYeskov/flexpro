@@ -36,10 +36,13 @@
       width: fit-content;
       right: 0;
       bottom: 0;
+
       h3 {
-        margin-top: 8px;
+        margin-top: 27px;
+
         font-size: 20px;
-        font-weight: 400;
+        font-weight: 200;
+        margin-bottom: 10px;
       }
       h4 {
         font-size: 24px;
@@ -75,7 +78,7 @@
     }
   }
   .reputation {
-    padding: 60px 0 84px 0;
+    padding: 70px 0 70px 0;
     h2 {
       font-size: 36px;
       margin: 0 auto;
@@ -92,6 +95,7 @@
         border: 1px solid #e0e3eb;
         padding: 20px 20px 40px 20px;
         h3 {
+          margin-top: 8px;
           font-size: 20px;
           color: #3d445c;
         }
@@ -104,7 +108,7 @@
     }
   }
   .about {
-    padding: 74px 70px 202px 70px;
+    padding: 120px 70px 190px 70px;
     .about__wrapper {
       display: flex;
       position: relative;
@@ -153,14 +157,14 @@
       text-align: center;
       font-size: 36px;
       margin: 0;
-      padding-top: 44px;
-      margin-bottom: 36px;
+      padding-top: 70px;
+      margin-bottom: 50px;
     }
     .services__wrapper {
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
-      padding-bottom: 76px;
+      padding-bottom: 70px;
 
       .wrapper__block {
         padding: 40px 60px;
@@ -242,7 +246,7 @@
     background-image: url(../img/consultaion.png);
     background-size: cover;
     background-repeat: no-repeat;
-    padding: 100px 160px 100px 112px;
+    padding: 120px 160px 120px 112px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -266,11 +270,11 @@
     }
   }
   .projects {
-    padding: 88px 112px 138px 88px;
+    padding: 120px 112px 120px 88px;
     h2 {
       font-size: 36px;
       color: #292e3d;
-      margin-bottom: 32px;
+      margin-bottom: 50px;
     }
     .projects__wrapper {
       display: flex;
@@ -279,6 +283,7 @@
         h3 {
           font-size: 24px;
           color: #c2c7d6;
+          margin-bottom: 20px;
         }
         h3:first-child {
           margin-top: 0;
@@ -347,7 +352,7 @@
     text-align: center;
     align-items: center;
     justify-content: center;
-    padding: 60px 370px;
+    padding: 70px 370px;
     background-color: #f6f8f7;
     @media (max-width: 1340px) {
       padding: 60px 300px;
@@ -390,14 +395,14 @@
         color: white;
         border: none;
         margin: 0 auto;
-        margin-top: 55px;
+        margin-top: 12px;
       }
     }
   }
   footer {
     .footer__container {
       display: flex;
-      padding: 80px 112px;
+      padding: 70px 112px;
       justify-content: space-between;
       .footer__left {
         h4 {
@@ -454,6 +459,7 @@
       h4 {
         font-size: 16px;
         font-weight: 200;
+        margin-bottom: 0;
       }
     }
   }
