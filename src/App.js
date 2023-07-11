@@ -1,3 +1,5 @@
+import { useRef, useState, useEffect } from "react";
+
 import "./styles/app.scss";
 import logo from "./img/logo.png";
 import backVector from "./img/backVector.svg";
@@ -26,7 +28,21 @@ import project4 from "./img/project4.png";
 import fb from "./img/fbVector.png";
 import ld from "./img/lnVector.png";
 import twitter from "./img/twitterVector.png";
+import ProjectsSlider from "./components/ProjectsSlider";
+import BannerSlider from "./components/BannerSlider";
+import BrendSlider from "./components/BrendSlider";
+import FeedBack from "./components/Feedback";
 function App() {
+  const scrollToSection = (sectionId) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      const offset = -60; // Добавьте необходимую величину отступа
+      window.scrollTo({
+        top: section.offsetTop - offset,
+        behavior: "smooth",
+      });
+    }
+  };
   return (
     <div className="App">
       <header>
@@ -62,19 +78,30 @@ function App() {
           </button>
           <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-              <a class="nav-item nav-link active" href="#">
-                Home <span class="sr-only">(current)</span>
-              </a>
-              <a class="nav-item nav-link" href="#">
+              <a
+                class="nav-item nav-link"
+                onClick={() => scrollToSection("about")}
+              >
                 About Us
               </a>
-              <a class="nav-item nav-link" href="#">
+              <a
+                class="nav-item nav-link"
+                onClick={() => scrollToSection("projects")}
+              >
                 Projects
               </a>
-              <a class="nav-item nav-link " href="#">
+              <a
+                class="nav-item nav-link "
+                href="#"
+                onClick={() => scrollToSection("services")}
+              >
                 Services
               </a>
-              <a class="nav-item nav-link " href="#">
+              <a
+                class="nav-item nav-link "
+                href="#"
+                onClick={() => scrollToSection("feedback")}
+              >
                 Contact us
               </a>
             </div>
@@ -82,7 +109,7 @@ function App() {
         </nav>
       </header>
       <main>
-        <section className="slider">
+        {/* <section className="slider">
           <h1>Building things is our mission.</h1>
           <div className="slider__projects">
             <h3>Feature Projects</h3>
@@ -99,7 +126,8 @@ function App() {
               </button>
             </div>
           </div>
-        </section>
+        </section> */}
+        <BannerSlider />
         <section className="reputation">
           <h2>Our Reputation</h2>
           <div className="reputation__wrapper">
@@ -122,7 +150,7 @@ function App() {
             </div>
           </div>
         </section>
-        <section className="about">
+        <section className="about" id="about">
           <div className="about__wrapper">
             <div className="wrapper__image">
               <img src={aboutImg} alt="image" />
@@ -145,7 +173,8 @@ function App() {
             </div>
           </div>
         </section>
-        <section className="services">
+        <BrendSlider />
+        <section className="services" id="services">
           <h2>Services</h2>
 
           <div className="services__wrapper">
@@ -223,7 +252,8 @@ function App() {
           </div>
           <button>Get your consultation</button>
         </section>
-        <section className="projects">
+
+        {/* <section className="projects" id="projects">
           <h2>Projects</h2>
           <div className="projects__wrapper">
             <div className="projects__left">
@@ -279,30 +309,18 @@ function App() {
               </div>
             </div>
           </div>
+        </section> */}
+        <section id="projects" className="projects">
+          <ProjectsSlider />
         </section>
-        <section className="feedback">
+
+        <section className="feedback" id="feedback">
           <h2>What can us do for you?</h2>
           <h3>
             We are ready to work on a project of any complexity, whether it’s
             commercial or residential.
           </h3>
-          <form>
-            <input placeholder="Your Name" type="text" />
-            <input placeholder="Email" type="emaiı" />
-
-            <select>
-              <option value="" disabled selected>
-                Reason for Contacting*
-              </option>
-              <option value="1"> 1</option>
-              <option value="2"> 2</option>
-              <option value="3"> 3</option>
-              <option value="4"> 4</option>
-            </select>
-            <input placeholder="Phone" type="number" />
-            <input placeholder="Message" type="text" id="message" />
-            <button type="submit">Submit</button>
-          </form>
+          <FeedBack />
         </section>
       </main>
       <footer>
