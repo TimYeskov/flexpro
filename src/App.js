@@ -33,16 +33,33 @@ import BannerSlider from "./components/BannerSlider";
 import BrendSlider from "./components/BrendSlider";
 import FeedBack from "./components/Feedback";
 function App() {
-  const scrollToSection = (sectionId) => {
+  const scrollToSection = (sectionId, duration) => {
     const section = document.getElementById(sectionId);
     if (section) {
       const offset = -60; // Добавьте необходимую величину отступа
-      window.scrollTo({
-        top: section.offsetTop - offset,
-        behavior: "smooth",
-      });
+      const targetPosition = section.offsetTop - offset;
+      const startPosition = window.pageYOffset;
+      const distance = targetPosition - startPosition;
+      let startTime = null;
+
+      const animateScroll = (currentTime) => {
+        if (!startTime) startTime = currentTime;
+        const elapsedTime = currentTime - startTime;
+        const progress = Math.min(elapsedTime / duration, 1);
+        const currentPosition = startPosition + distance * progress;
+        window.scrollTo(0, currentPosition);
+
+        if (elapsedTime < duration) {
+          requestAnimationFrame(animateScroll);
+        }
+      };
+
+      requestAnimationFrame(animateScroll);
     }
   };
+
+  // Пример использования с длительностью 1000 мс (1 секунда)
+
   return (
     <div className="App">
       <header>
@@ -80,27 +97,27 @@ function App() {
             <div class="navbar-nav">
               <a
                 class="nav-item nav-link"
-                onClick={() => scrollToSection("about")}
+                onClick={() => scrollToSection("about", 800)}
               >
                 About Us
               </a>
               <a
                 class="nav-item nav-link"
-                onClick={() => scrollToSection("projects")}
+                onClick={() => scrollToSection("projects", 800)}
               >
                 Projects
               </a>
               <a
                 class="nav-item nav-link "
                 href="#"
-                onClick={() => scrollToSection("services")}
+                onClick={() => scrollToSection("services", 800)}
               >
                 Services
               </a>
               <a
                 class="nav-item nav-link "
                 href="#"
-                onClick={() => scrollToSection("feedback")}
+                onClick={() => scrollToSection("feedback", 800)}
               >
                 Contact us
               </a>

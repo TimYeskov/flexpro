@@ -21,7 +21,7 @@ const BrendSlider = () => {
       </div>
       <Swiper
         slidesPerView={7}
-        spaceBetween={100}
+        spaceBetween={20}
         loop={true}
         freeMode={true}
         pagination={{

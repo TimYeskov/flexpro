@@ -387,11 +387,11 @@
           .container {
             h2 {
               font-size: 30px;
-              margin-bottom: 21px;
+              // margin-bottom: 21px;
             }
             h3 {
               font-size: 16px;
-              margin-bottom: 21px;
+              // margin-bottom: 21px;
             }
           }
         }
@@ -760,7 +760,13 @@
               flex-direction: column;
               align-items: center;
               justify-content: center;
+              position: relative;
+              left: 20px;
               .right__container {
+                align-items: center;
+                justify-content: center;
+                display: flex;
+
                 .mySwiper {
                   .container__1,
                   .container__2 {
@@ -768,7 +774,7 @@
                     .container__block {
                       width: 600px;
                       @media (max-width: 700px) {
-                        width: 530px;
+                        width: 500px;
                       }
                     }
                     .container__block {
@@ -837,6 +843,7 @@
         }
         @media (max-width: 480px) {
           padding: 88px 5px 138px 5px;
+          left: 20px;
           h2 {
             font-size: 30px;
           }
