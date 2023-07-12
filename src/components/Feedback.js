@@ -1,35 +1,51 @@
-import React, { useState, useRef } from "react";
-import axios from "axios";
+import React, { useRef } from "react";
 import emailjs from "@emailjs/browser";
+
 const FeedBack = () => {
   const form = useRef();
 
   const sendEmail = (e) => {
     e.preventDefault();
 
-    emailjs
-      .sendForm(
-        "service_y4o068m",
-        "template_rb2m20s",
-        form.current,
-        "0uTPywpgxTcDNoSmA"
-      )
-      .then(
-        (result) => {
-          console.log(result.text);
-        },
-        (error) => {
-          console.log(error.text);
-        }
-      );
-    e.target.reset();
+    const requiredInputs = form.current.querySelectorAll("input[required]");
+    let isFormValid = true;
+
+    requiredInputs.forEach((input) => {
+      if (input.value.trim() === "") {
+        isFormValid = false;
+      }
+    });
+
+    if (isFormValid) {
+      emailjs
+        .sendForm(
+          "service_y4o068m",
+          "template_rb2m20s",
+          form.current,
+          "0uTPywpgxTcDNoSmA"
+        )
+        .then(
+          (result) => {
+            console.log(result.text);
+            alert("Письмо доставлено!");
+          },
+          (error) => {
+            console.log(error.text);
+          }
+        );
+
+      e.target.reset();
+    } else {
+      alert("Пожалуйста, заполните все обязательные поля!");
+    }
   };
+
   return (
     <div className="App">
       <form ref={form} onSubmit={sendEmail}>
         <input type="text" placeholder="Your Name" name="user_name" required />
         <input type="text" placeholder="Email" name="user_mail" required />
-        <select name="user_select">
+        <select name="user_select" required>
           <option value="" disabled>
             Reason for Contacting*
           </option>
@@ -46,13 +62,7 @@ const FeedBack = () => {
           name="message"
           required
         />
-        <button
-          type="submit"
-          href="#openModal"
-          onClick={() => alert("Письмо доставлено!")}
-        >
-          Submit
-        </button>
+        <button type="submit">Submit</button>
       </form>
     </div>
   );
