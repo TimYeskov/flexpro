@@ -172,6 +172,9 @@
   }
   .about {
     padding: 120px 70px 190px 70px;
+    overflow: hidden;
+    position: relative;
+
     .about__wrapper {
       display: flex;
       position: relative;
@@ -191,6 +194,7 @@
         position: absolute;
         top: 12%;
         right: 0;
+
         h2 {
           font-size: 36px;
           margin: 0;
@@ -444,7 +448,8 @@
               margin: 0;
             }
           }
-          button:first-child {
+          button:focus {
+            outline: none;
           }
         }
       }
@@ -509,6 +514,55 @@
         margin: 0 auto;
         margin-top: 12px;
         cursor: pointer;
+      }
+      button:focus {
+        outline: none;
+      }
+    }
+    .popup {
+      position: fixed;
+      top: 30%;
+      right: 0;
+      transform: translateY(-50%);
+      width: 300px;
+      background-color: #fff;
+      z-index: 999;
+      border-radius: 10px;
+      right: -400px;
+      transform: translateY(-50%);
+      animation: slide-in 0.5s ease-out forwards;
+      @keyframes slide-in {
+        from {
+          right: -400px;
+        }
+        to {
+          right: 0;
+        }
+      }
+
+      .popup-content {
+        padding: 20px;
+        text-align: center;
+
+        p {
+          margin-bottom: 20px;
+          font-size: 16px;
+        }
+        button {
+          padding: 8px 16px;
+          border: none;
+          background-color: #2047a9;
+          color: white;
+          border-radius: 5px;
+          cursor: pointer;
+          font-size: 10px;
+        }
+        button:focus {
+          outline: none;
+        }
+      }
+      @media (max-width: 1150px) {
+        top: 17%;
       }
     }
   }

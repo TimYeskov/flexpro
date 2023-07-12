@@ -1,8 +1,16 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 
 const FeedBack = () => {
   const form = useRef();
+
+  const [showPopup, setShowPopup] = useState(false);
+  const [popupContent, setPopupContent] = useState("");
+
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
 
   const sendEmail = (e) => {
     e.preventDefault();
@@ -16,6 +24,11 @@ const FeedBack = () => {
       }
     });
 
+    const emailInput = form.current.querySelector('input[name="user_mail"]');
+    if (isFormValid && !validateEmail(emailInput.value)) {
+      isFormValid = false;
+    }
+
     if (isFormValid) {
       emailjs
         .sendForm(
@@ -27,21 +40,29 @@ const FeedBack = () => {
         .then(
           (result) => {
             console.log(result.text);
-            alert("Письмо доставлено!");
+            setPopupContent("Письмо доставлено!");
+            setShowPopup(true);
           },
           (error) => {
             console.log(error.text);
+            setPopupContent("Произошла ошибка при отправке письма.");
+            setShowPopup(true);
           }
         );
 
       e.target.reset();
     } else {
-      alert("Пожалуйста, заполните все обязательные поля!");
+      setPopupContent("Пожалуйста, заполните все обязательные поля корректно!");
+      setShowPopup(true);
     }
   };
 
+  const closePopup = () => {
+    setShowPopup(false);
+  };
+
   return (
-    <div className="App">
+    <>
       <form ref={form} onSubmit={sendEmail}>
         <input type="text" placeholder="Your Name" name="user_name" required />
         <input type="text" placeholder="Email" name="user_mail" required />
@@ -64,7 +85,25 @@ const FeedBack = () => {
         />
         <button type="submit">Submit</button>
       </form>
-    </div>
+
+      {showPopup && (
+        <div className={`popup ${showPopup ? "" : "hidden"}`}>
+          <div className="popup-content">
+            <p
+              style={{
+                color:
+                  popupContent === "Письмо доставлено!"
+                    ? "green"
+                    : "rgb(221, 46, 46)",
+              }}
+            >
+              {popupContent}
+            </p>
+            <button onClick={closePopup}>OK</button>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

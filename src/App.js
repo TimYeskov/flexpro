@@ -1,13 +1,9 @@
-import { useRef, useState, useEffect } from "react";
-
 import "./styles/app.scss";
 
 import logo from "./img/logo.png";
-import backVector from "./img/backVector.svg";
-import nextVector from "./img/nextVector.svg";
+
 import reputation1 from "./img/reputation1.svg";
 import reputation2 from "./img/reputation2.svg";
-import aboutImg from "./img/aboutImg.png";
 
 import services1 from "./img/services1.svg";
 import services2 from "./img/services2.svg";
@@ -15,16 +11,6 @@ import services3 from "./img/services3.svg";
 import services4 from "./img/services4.svg";
 import services5 from "./img/services5.svg";
 import services6 from "./img/services6.svg";
-
-import exp1 from "./img/exp1.png";
-import exp2 from "./img/exp2.png";
-import exp3 from "./img/exp3.png";
-import exp4 from "./img/exp4.png";
-
-import project1 from "./img/project1.png";
-import project2 from "./img/project2.png";
-import project3 from "./img/project3.png";
-import project4 from "./img/project4.png";
 
 import fb from "./img/fbVector.png";
 import ld from "./img/lnVector.png";
@@ -34,6 +20,7 @@ import BannerSlider from "./components/BannerSlider";
 import BrendSlider from "./components/BrendSlider";
 import FeedBack from "./components/Feedback";
 import Header from "./components/Header";
+import About from "./components/About";
 function App() {
   return (
     <div className="App">
@@ -81,29 +68,7 @@ function App() {
             </div>
           </div>
         </section>
-        <section className="about" id="about">
-          <div className="about__wrapper">
-            <div className="wrapper__image">
-              <img src={aboutImg} alt="image" />
-            </div>
-            <div className="wrapper__text">
-              <h2>About us</h2>
-              <h4>
-                <p>
-                  For more than 30 years we have been delivering world-class
-                  construction and we’ve built many lasting relationships along
-                  the way.{" "}
-                </p>
-                <p>
-                  We’ve matured into an industry leader and trusted resource for
-                  those seeking quality, innovation and reliability when
-                  building in the U.S.
-                </p>
-              </h4>
-              <button>More on Our History</button>
-            </div>
-          </div>
-        </section>
+        <About />
         <section className="brand" id="brands">
           <BrendSlider />
         </section>
