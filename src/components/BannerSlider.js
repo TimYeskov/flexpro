@@ -24,14 +24,14 @@ const BannerSlider = () => {
         <div className="row">
           <div className="block">
             <Swiper
-              //   autoplay={{
-              //     delay: 2500,
-              //     disableOnInteraction: false,
-              //   }}
+              autoplay={{
+                delay: 2500,
+                disableOnInteraction: false,
+              }}
               speed={1300}
               spaceBetween={200}
               pagination={false}
-              modules={[Pagination, Navigation]}
+              modules={[Pagination, Navigation, Autoplay]}
               className="mySwiper"
               onBeforeInit={(swiper) => {
                 swiperRef.current = swiper;

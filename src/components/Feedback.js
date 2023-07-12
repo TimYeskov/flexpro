@@ -25,22 +25,36 @@ const FeedBack = () => {
     e.target.reset();
   };
   return (
-    <form ref={form} onSubmit={sendEmail}>
-      <input type="text" placeholder="Your Name" name="user_name" />
-      <input type="text" placeholder="Email" name="user_mail" />
-      <select name="user_select">
-        <option value="" disabled>
-          Reason for Contacting*
-        </option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-      </select>
-      <input type="number" placeholder="Phone" name="user_phone" />
-      <input type="text" placeholder="Message" id="message" name="message" />
-      <button type="submit">Submit</button>
-    </form>
+    <div className="App">
+      <form ref={form} onSubmit={sendEmail}>
+        <input type="text" placeholder="Your Name" name="user_name" required />
+        <input type="text" placeholder="Email" name="user_mail" required />
+        <select name="user_select">
+          <option value="" disabled>
+            Reason for Contacting*
+          </option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+        </select>
+        <input type="number" placeholder="Phone" name="user_phone" />
+        <input
+          type="text"
+          placeholder="Message"
+          id="message"
+          name="message"
+          required
+        />
+        <button
+          type="submit"
+          href="#openModal"
+          onClick={() => alert("Письмо доставлено!")}
+        >
+          Submit
+        </button>
+      </form>
+    </div>
   );
 };
 

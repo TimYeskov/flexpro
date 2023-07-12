@@ -1,0 +1,58 @@
+@media (min-width: 1400px) {
+  .App {
+    .about {
+      padding: 120px 100px;
+      .about__wrapper {
+        align-items: center;
+        justify-content: center;
+        .wrapper__text {
+          right: 50px;
+        }
+      }
+    }
+    .services {
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      margin: 0 auto;
+      .services__wrapper {
+        max-width: 1080px;
+        margin: 0 auto;
+      }
+    }
+    .experience {
+      .experience__left {
+        .left__block {
+          max-width: 220px;
+        }
+      }
+    }
+    .projects {
+      justify-content: center;
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+
+      .projects__wrapper {
+        .projects__left {
+          margin-right: 200px;
+        }
+      }
+    }
+    .feedback {
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      margin: 0 auto;
+      form {
+        max-width: 614px;
+      }
+    }
+    footer {
+      .footer__container {
+        max-width: 1500px;
+        margin: 0 auto;
+      }
+    }
+  }
+}

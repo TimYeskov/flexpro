@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect } from "react";
 
 import "./styles/app.scss";
+
 import logo from "./img/logo.png";
 import backVector from "./img/backVector.svg";
 import nextVector from "./img/nextVector.svg";
@@ -32,99 +33,12 @@ import ProjectsSlider from "./components/ProjectsSlider";
 import BannerSlider from "./components/BannerSlider";
 import BrendSlider from "./components/BrendSlider";
 import FeedBack from "./components/Feedback";
+import Header from "./components/Header";
 function App() {
-  const scrollToSection = (sectionId, duration) => {
-    const section = document.getElementById(sectionId);
-    if (section) {
-      const offset = -60; // Добавьте необходимую величину отступа
-      const targetPosition = section.offsetTop - offset;
-      const startPosition = window.pageYOffset;
-      const distance = targetPosition - startPosition;
-      let startTime = null;
-
-      const animateScroll = (currentTime) => {
-        if (!startTime) startTime = currentTime;
-        const elapsedTime = currentTime - startTime;
-        const progress = Math.min(elapsedTime / duration, 1);
-        const currentPosition = startPosition + distance * progress;
-        window.scrollTo(0, currentPosition);
-
-        if (elapsedTime < duration) {
-          requestAnimationFrame(animateScroll);
-        }
-      };
-
-      requestAnimationFrame(animateScroll);
-    }
-  };
-
-  // Пример использования с длительностью 1000 мс (1 секунда)
-
   return (
     <div className="App">
-      <header>
-        {/* <div className="container">
-          <div>
-            <img src={logo} alt="logo" />
-          </div>
-          <nav>
-            <ul>
-              <li>Home</li>
-              <li>About Us</li>
-              <li>Projects</li>
-              <li>Services</li>
-              <li>Contact Us</li>
-            </ul>
-          </nav>
-        </div> */}
+      <Header />
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <a class="navbar-brand" href="#">
-            <img src={logo} alt="logo" />
-          </a>
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarNavAltMarkup"
-            aria-controls="navbarNavAltMarkup"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-              <a
-                class="nav-item nav-link"
-                onClick={() => scrollToSection("about", 800)}
-              >
-                About Us
-              </a>
-              <a
-                class="nav-item nav-link"
-                onClick={() => scrollToSection("projects", 800)}
-              >
-                Projects
-              </a>
-              <a
-                class="nav-item nav-link "
-                href="#"
-                onClick={() => scrollToSection("services", 800)}
-              >
-                Services
-              </a>
-              <a
-                class="nav-item nav-link "
-                href="#"
-                onClick={() => scrollToSection("feedback", 800)}
-              >
-                Contact us
-              </a>
-            </div>
-          </div>
-        </nav>
-      </header>
       <main>
         {/* <section className="slider">
           <h1>Building things is our mission.</h1>
@@ -190,7 +104,10 @@ function App() {
             </div>
           </div>
         </section>
-        <BrendSlider />
+        <section className="brand" id="brands">
+          <BrendSlider />
+        </section>
+
         <section className="services" id="services">
           <h2>Services</h2>
 

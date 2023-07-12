@@ -14,14 +14,14 @@ import brand7 from "../img/brand7.png";
 
 const BrendSlider = () => {
   return (
-    <section className="brand">
+    <>
       <div className="container">
         <h2>Our Brands</h2>
         <h3>We have been working with some Fortune 500+ clients</h3>
       </div>
       <Swiper
         slidesPerView={7}
-        spaceBetween={20}
+        spaceBetween={0}
         loop={true}
         freeMode={true}
         pagination={{
@@ -73,7 +73,7 @@ const BrendSlider = () => {
           <img src={brand2} />
         </SwiperSlide>
       </Swiper>
-    </section>
+    </>
   );
 };
 
