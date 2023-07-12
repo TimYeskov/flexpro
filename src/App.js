@@ -139,7 +139,7 @@ function App() {
             </div>
           </div>
         </section>
-        <section className="experience">
+        <section className="experience" id="experience">
           <div className="experience__left">
             <div className="left__1">
               <div className="left__block">

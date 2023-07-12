@@ -122,6 +122,14 @@ const Header = () => {
               Services
             </a>
             <a
+              class="nav-item nav-link "
+              onClick={() => scrollToSection("experience", 800)}
+              data-section="experience"
+              data-offset="50"
+            >
+              Experience
+            </a>
+            <a
               class="nav-item nav-link"
               onClick={() => scrollToSection("projects", 800)}
               data-section="projects"

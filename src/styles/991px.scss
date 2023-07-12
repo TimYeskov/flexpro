@@ -33,16 +33,21 @@
         .navbar {
           #navbarNavAltMarkup {
             .navbar-nav {
-              padding: 10px 0;
+              padding: 0;
+              justify-content: space-between;
               .nav-item:not(:last-child) {
-                margin-right: 20px;
+                margin-right: 0;
+              }
+              .nav-item {
+                font-size: 15px;
               }
             }
           }
         }
       }
-      @media (max-width: 480px) {
+      @media (max-width: 490px) {
         .navbar {
+          padding: 8px 10px;
           .navbar-brand {
             img {
               width: 100px;
@@ -53,36 +58,25 @@
           }
           #navbarNavAltMarkup {
             .navbar-nav {
-              padding: 10px 0;
-
-              .nav-item:not(:last-child) {
-                margin-right: 20px;
-              }
+              padding: 0;
               .nav-item {
-                font-size: 15px;
-              }
-              @media (max-width: 420px) {
-                // align-items: flex-start;
-                // justify-content: flex-start;
-                .nav-item:not(:last-child) {
-                  margin-right: 10px;
+                @media (max-width: 420px) {
+                  font-size: 12px;
                 }
               }
-              @media (max-width: 380px) {
+
+              // @media (max-width: 340px) {
+              //   align-items: flex-start;
+              //   justify-content: flex-start;
+              // }
+              @media (max-width: 360px) {
                 .nav-item {
-                  font-size: 13px;
+                  font-size: 10px;
                 }
               }
-              @media (max-width: 340px) {
-                align-items: flex-start;
-                justify-content: flex-start;
-                .nav-item:not(:last-child) {
-                  margin-right: 16px;
-                }
-              }
-              @media (max-width: 340px) {
-                .nav-item:not(:last-child) {
-                  margin-right: 10px;
+              @media (max-width: 280px) {
+                .nav-item {
+                  font-size: 8px;
                 }
               }
             }
