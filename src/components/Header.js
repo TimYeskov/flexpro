@@ -1,5 +1,5 @@
 import logo from "../img/logo.png";
-import "../styles/app.scss";
+import React, { useEffect } from "react";
 
 const Header = () => {
   const scrollToSection = (sectionId, duration) => {
@@ -8,26 +8,10 @@ const Header = () => {
       const navLink = document.querySelector(`[data-section="${sectionId}"]`);
       const offset = parseInt(navLink.getAttribute("data-offset")) || 0;
       const targetPosition = section.offsetTop - offset;
-      const startPosition = window.pageYOffset;
-      const distance = targetPosition - startPosition;
-      let startTime = null;
-
-      const animateScroll = (currentTime) => {
-        if (!startTime) startTime = currentTime;
-        const elapsedTime = currentTime - startTime;
-        const progress = Math.min(elapsedTime / duration, 1);
-        const currentPosition = startPosition + distance * progress;
-        window.scrollTo(0, currentPosition);
-
-        if (elapsedTime < duration) {
-          requestAnimationFrame(animateScroll);
-        } else {
-          // Скролл завершен, выделяем активную ссылку
-          highlightNavLink(sectionId);
-        }
-      };
-
-      requestAnimationFrame(animateScroll);
+      window.scrollTo({
+        top: targetPosition,
+        behavior: "smooth",
+      });
     }
   };
 
@@ -43,49 +27,40 @@ const Header = () => {
     }
   };
 
-  // Обработчик события scroll
-  const handleScroll = () => {
+  useEffect(() => {
+    const observerOptions = {
+      root: null,
+      rootMargin: "0px",
+      threshold: 0.5,
+    };
+
+    const handleScroll = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const sectionId = entry.target.getAttribute("id");
+          highlightNavLink(sectionId);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(handleScroll, observerOptions);
+
     const sections = document.querySelectorAll("section");
-    let currentSectionId = null;
+    sections.forEach((section) => observer.observe(section));
 
-    for (let i = 0; i < sections.length; i++) {
-      const section = sections[i];
-      const rect = section.getBoundingClientRect();
-      if (rect.top >= 0 && rect.top <= window.innerHeight) {
-        currentSectionId = section.getAttribute("id");
-        break;
-      }
-    }
+    return () => {
+      sections.forEach((section) => observer.unobserve(section));
+    };
+  }, []);
 
-    if (currentSectionId) {
-      highlightNavLink(currentSectionId);
-    }
-  };
-
-  window.addEventListener("scroll", handleScroll);
   return (
     <header>
-      {/* <div className="container">
-          <div>
-            <img src={logo} alt="logo" />
-          </div>
-          <nav>
-            <ul>
-              <li>Home</li>
-              <li>About Us</li>
-              <li>Projects</li>
-              <li>Services</li>
-              <li>Contact Us</li>
-            </ul>
-          </nav>
-        </div> */}
-
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">
+      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <a className="navbar-brand" href="#">
           <img src={logo} alt="logo" />
         </a>
         <button
-          class="navbar-toggler"
+          className="navbar-toggler"
           type="button"
           data-toggle="collapse"
           data-target="#navbarNavAltMarkup"
@@ -93,12 +68,12 @@ const Header = () => {
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span class="navbar-toggler-icon"></span>
+          <span className="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <div class="navbar-nav">
+        <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div className="navbar-nav">
             <a
-              class="nav-item nav-link"
+              className="nav-item nav-link"
               onClick={() => scrollToSection("about", 800)}
               data-section="about"
               data-offset="-60"
@@ -106,7 +81,7 @@ const Header = () => {
               About Us
             </a>
             <a
-              class="nav-item nav-link"
+              className="nav-item nav-link"
               onClick={() => scrollToSection("brands", 800)}
               data-section="brands"
               data-offset="200"
@@ -114,7 +89,7 @@ const Header = () => {
               Brands
             </a>
             <a
-              class="nav-item nav-link "
+              className="nav-item nav-link "
               onClick={() => scrollToSection("services", 800)}
               data-section="services"
               data-offset="50"
@@ -122,7 +97,7 @@ const Header = () => {
               Services
             </a>
             <a
-              class="nav-item nav-link "
+              className="nav-item nav-link "
               onClick={() => scrollToSection("experience", 800)}
               data-section="experience"
               data-offset="50"
@@ -130,16 +105,15 @@ const Header = () => {
               Experience
             </a>
             <a
-              class="nav-item nav-link"
+              className="nav-item nav-link"
               onClick={() => scrollToSection("projects", 800)}
               data-section="projects"
               data-offset="-30"
             >
               Projects
             </a>
-
             <a
-              class="nav-item nav-link "
+              className="nav-item nav-link "
               onClick={() => scrollToSection("feedback", 800)}
               data-section="feedback"
               data-offset="50"
@@ -152,4 +126,5 @@ const Header = () => {
     </header>
   );
 };
+
 export default Header;
