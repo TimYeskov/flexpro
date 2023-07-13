@@ -1,57 +1,58 @@
 import logo from "../img/logo.png";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 const Header = () => {
-  const scrollToSection = (sectionId, duration) => {
-    const section = document.getElementById(sectionId);
-    if (section) {
-      const navLink = document.querySelector(`[data-section="${sectionId}"]`);
-      const offset = parseInt(navLink.getAttribute("data-offset")) || 0;
-      const targetPosition = section.offsetTop - offset;
-      window.scrollTo({
-        top: targetPosition,
-        behavior: "smooth",
-      });
-    }
-  };
-
-  const highlightNavLink = (sectionId) => {
-    const navLinks = document.getElementsByClassName("nav-link");
-    for (let i = 0; i < navLinks.length; i++) {
-      const navLink = navLinks[i];
-      if (navLink.getAttribute("data-section") === sectionId) {
-        navLink.classList.add("active");
-      } else {
-        navLink.classList.remove("active");
-      }
-    }
-  };
+  const [currentSectionId, setCurrentSectionId] = useState(null);
 
   useEffect(() => {
-    const observerOptions = {
-      root: null,
-      rootMargin: "0px",
-      threshold: 0.5,
-    };
+    const handleScroll = () => {
+      const sections = document.querySelectorAll("section");
+      let currentSectionId = null;
 
-    const handleScroll = (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const sectionId = entry.target.getAttribute("id");
-          highlightNavLink(sectionId);
+      for (let i = 0; i < sections.length; i++) {
+        const section = sections[i];
+        const rect = section.getBoundingClientRect();
+        if (rect.top >= 0 && rect.top <= window.innerHeight) {
+          currentSectionId = section.getAttribute("id");
+          break;
         }
-      });
+      }
+
+      setCurrentSectionId(currentSectionId);
     };
 
-    const observer = new IntersectionObserver(handleScroll, observerOptions);
+    const throttle = (func, limit) => {
+      let inThrottle;
+      return function () {
+        const args = arguments;
+        const context = this;
+        if (!inThrottle) {
+          func.apply(context, args);
+          inThrottle = true;
+          setTimeout(() => (inThrottle = false), limit);
+        }
+      };
+    };
 
-    const sections = document.querySelectorAll("section");
-    sections.forEach((section) => observer.observe(section));
+    const throttledScrollHandler = throttle(handleScroll, 200);
+    window.addEventListener("scroll", throttledScrollHandler);
 
     return () => {
-      sections.forEach((section) => observer.unobserve(section));
+      window.removeEventListener("scroll", throttledScrollHandler);
     };
   }, []);
+
+  const scrollToSection = (sectionId, offset) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+        inline: "nearest",
+        offset: -offset,
+      });
+    }
+  };
 
   return (
     <header>
@@ -73,50 +74,50 @@ const Header = () => {
         <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div className="navbar-nav">
             <a
-              className="nav-item nav-link"
-              onClick={() => scrollToSection("about", 800)}
-              data-section="about"
-              data-offset="-60"
+              className={`nav-item nav-link ${
+                currentSectionId === "about" ? "active" : ""
+              }`}
+              onClick={() => scrollToSection("about", 60)}
             >
               About Us
             </a>
             <a
-              className="nav-item nav-link"
-              onClick={() => scrollToSection("brands", 800)}
-              data-section="brands"
-              data-offset="200"
+              className={`nav-item nav-link ${
+                currentSectionId === "brands" ? "active" : ""
+              }`}
+              onClick={() => scrollToSection("brands", 200)}
             >
               Brands
             </a>
             <a
-              className="nav-item nav-link "
-              onClick={() => scrollToSection("services", 800)}
-              data-section="services"
-              data-offset="50"
+              className={`nav-item nav-link ${
+                currentSectionId === "services" ? "active" : ""
+              }`}
+              onClick={() => scrollToSection("services", 50)}
             >
               Services
             </a>
             <a
-              className="nav-item nav-link "
-              onClick={() => scrollToSection("experience", 800)}
-              data-section="experience"
-              data-offset="50"
+              className={`nav-item nav-link ${
+                currentSectionId === "experience" ? "active" : ""
+              }`}
+              onClick={() => scrollToSection("experience", 50)}
             >
               Experience
             </a>
             <a
-              className="nav-item nav-link"
-              onClick={() => scrollToSection("projects", 800)}
-              data-section="projects"
-              data-offset="-30"
+              className={`nav-item nav-link ${
+                currentSectionId === "projects" ? "active" : ""
+              }`}
+              onClick={() => scrollToSection("projects", 30)}
             >
               Projects
             </a>
             <a
-              className="nav-item nav-link "
-              onClick={() => scrollToSection("feedback", 800)}
-              data-section="feedback"
-              data-offset="50"
+              className={`nav-item nav-link ${
+                currentSectionId === "feedback" ? "active" : ""
+              }`}
+              onClick={() => scrollToSection("feedback", 50)}
             >
               Contact us
             </a>
