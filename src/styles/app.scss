@@ -12,6 +12,13 @@
     }
   }
 }
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #83838398;
+}
 .App {
   animation: fade-in 2s;
   header {
